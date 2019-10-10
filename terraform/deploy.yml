@@ -1,0 +1,16 @@
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Deploy Java Web Application to Tomcat 
+      copy:
+        src: /var/lib/jenkins/workspace/terraform/code-build/target/helloworldproject-1.0.war 
+        dest: /var/lib/tomcat8/webapps/helloworldproject-1.0.war
+        owner: tomcat8
+        group: tomcat8
+        mode: '0755'
+
+    - name: Restart Tomcat Server
+      service:
+        name: tomcat8
+        state: started
