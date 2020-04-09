@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: javaapp
+  name: javaapp
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: javaapp
+  template: 
+    metadata:
+      labels:
+        run: javaapp
+    spec:
+      containers:
+      - image: skakhader/javaapp:latest
+        imagePullPolicy: Always
+        name: javaapp
